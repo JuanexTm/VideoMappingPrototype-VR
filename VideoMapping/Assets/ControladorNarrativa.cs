@@ -32,15 +32,15 @@ public class ControladorNarrativa : MonoBehaviour
     void EjecutarEvento(EventoVisual ev)
     {
         // Movimiento cámara
-        if (ev.nuevaPosicionCamara.HasValue)
-            camaraPadre.transform.position = ev.nuevaPosicionCamara.Value;
+        if (ev.moverCamara)
+            camaraPadre.transform.position = ev.nuevaPosicionCamara;
 
-        if (ev.rotacionAdicionalCamara.HasValue)
-            camaraPadre.transform.Rotate(ev.rotacionAdicionalCamara.Value);
+        if (ev.rotarCamara)
+            camaraPadre.transform.Rotate(ev.rotacionAdicionalCamara);
 
         // Fog
-        if (ev.fogDensity.HasValue)
-            RenderSettings.fogDensity = ev.fogDensity.Value;
+        if (ev.cambiarFog)
+            RenderSettings.fogDensity = ev.nuevaDensidadFog;
 
         // Activación y desactivación
         foreach (GameObject obj in ev.objetosActivar)

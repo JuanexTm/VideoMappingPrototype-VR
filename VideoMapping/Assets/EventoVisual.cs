@@ -8,11 +8,15 @@ public class EventoVisual
     public float tiempoEvento = 0f;
 
     [Header("Cámara")]
-    public Vector3? nuevaPosicionCamara;
-    public Vector3? rotacionAdicionalCamara;
+    public bool moverCamara = false;
+    public Vector3 nuevaPosicionCamara;
+
+    public bool rotarCamara = false;
+    public Vector3 rotacionAdicionalCamara;
 
     [Header("Fog")]
-    public float? fogDensity;
+    public bool cambiarFog = false;
+    [Range(0f, 1f)] public float nuevaDensidadFog = 0.1f;
 
     [Header("Activar / Desactivar Objetos")]
     public List<GameObject> objetosActivar = new();
