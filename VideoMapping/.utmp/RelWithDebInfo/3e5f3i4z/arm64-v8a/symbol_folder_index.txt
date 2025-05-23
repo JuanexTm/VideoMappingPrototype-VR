@@ -1,0 +1,1 @@
+C:\Repositorios\VideoMappingPrototype-VR\VideoMapping\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\3e5f3i4z\obj\arm64-v8a
