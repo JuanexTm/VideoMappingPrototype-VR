@@ -325,7 +325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &16497342
 Transform:
   m_ObjectHideFlags: 0
@@ -11974,6 +11974,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 422276, guid: 131a112cf67c4e98af44b350b210ef43, type: 3}
   m_PrefabInstance: {fileID: 1247977959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &920413363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3011066194226696567, guid: ed9c1977df99c294a929e51f3b16157d, type: 3}
+  m_PrefabInstance: {fileID: 1531901589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &920413364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6742340289013086916, guid: ed9c1977df99c294a929e51f3b16157d, type: 3}
@@ -18249,32 +18254,179 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioNarracion: {fileID: 937264082}
-  camaraPadre: {fileID: 2096933639}
+  camaraPadre: {fileID: 2096933640}
   eventos:
   - tiempoEvento: 0
     moverCamara: 1
     nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 15
     rotarCamara: 0
-    rotacionAdicionalCamara: {x: 0, y: 0, z: 0}
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
     cambiarFog: 1
-    nuevaDensidadFog: 0.1
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
     objetosActivar: []
     objetosDesactivar: []
     objetosEscalaIn: []
     objetosEscalaOut: []
     descripcion: Inicio de Mapping
-  - tiempoEvento: 0
+  - tiempoEvento: 24
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 1
+    densidadFogObjetivo: 0
+    duracionFog: 5
+    objetosActivar:
+    - {fileID: 1714017066}
+    objetosDesactivar:
+    - {fileID: 16497341}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: "Aparici\xF3n de libros y desenso de c\xE1mara"
+  - tiempoEvento: 45
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 1
+    rotacionObjetivoEuler: {x: 0, y: 360, z: 0}
+    duracionRotacionCamara: 14
+    cambiarFog: 0
+    densidadFogObjetivo: 0
+    duracionFog: 2
+    objetosActivar: []
+    objetosDesactivar: []
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: "Giro de c\xE1mara"
+  - tiempoEvento: 59
+    moverCamara: 1
+    nuevaPosicionCamara: {x: 28, y: -29, z: 44}
+    duracionMovimientoCamara: 10
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 0
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
+    objetosActivar:
+    - {fileID: 920413363}
+    objetosDesactivar: []
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: Sala negra con velas
+  - tiempoEvento: 72
     moverCamara: 1
     nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 8
     rotarCamara: 0
-    rotacionAdicionalCamara: {x: 0, y: 0, z: 0}
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 0
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
+    objetosActivar:
+    - {fileID: 1515066606}
+    - {fileID: 986082574}
+    objetosDesactivar:
+    - {fileID: 1714017066}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: "Aparici\xF3n d pajaros y mariposas"
+  - tiempoEvento: 85
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 0
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
+    objetosActivar:
+    - {fileID: 385310442}
+    objetosDesactivar:
+    - {fileID: 920413363}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: Pisadas
+  - tiempoEvento: 104
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
     cambiarFog: 1
-    nuevaDensidadFog: 0.1
+    densidadFogObjetivo: 0.1
+    duracionFog: 8
+    objetosActivar:
+    - {fileID: 16497341}
+    - {fileID: 286650046}
+    - {fileID: 1150337639}
+    objetosDesactivar:
+    - {fileID: 1515066606}
+    - {fileID: 986082574}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: tisteza
+  - tiempoEvento: 124
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 1
+    densidadFogObjetivo: 0
+    duracionFog: 5
+    objetosActivar:
+    - {fileID: 986082574}
+    - {fileID: 1153691931}
+    objetosDesactivar:
+    - {fileID: 16497341}
+    - {fileID: 286650046}
+    - {fileID: 1150337639}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: tisteza is no more
+  - tiempoEvento: 141
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 0
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
     objetosActivar: []
+    objetosDesactivar:
+    - {fileID: 1153691931}
+    objetosEscalaIn: []
+    objetosEscalaOut: []
+    descripcion: tisteza is no more
+  - tiempoEvento: 152
+    moverCamara: 0
+    nuevaPosicionCamara: {x: 28, y: -24, z: 44}
+    duracionMovimientoCamara: 2
+    rotarCamara: 0
+    rotacionObjetivoEuler: {x: 0, y: 0, z: 0}
+    duracionRotacionCamara: 2
+    cambiarFog: 0
+    densidadFogObjetivo: 0.1
+    duracionFog: 2
+    objetosActivar:
+    - {fileID: 349733541}
+    - {fileID: 1515066606}
     objetosDesactivar: []
     objetosEscalaIn: []
     objetosEscalaOut: []
-    descripcion: Inicio de Mapping
+    descripcion: tisteza is no more
 --- !u!4 &1183453259
 Transform:
   m_ObjectHideFlags: 0

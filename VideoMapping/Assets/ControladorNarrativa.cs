@@ -5,72 +5,103 @@ using System.Collections;
 public class ControladorNarrativa : MonoBehaviour
 {
     public AudioSource audioNarracion;
-    public GameObject camaraPadre; // GameObject contenedor de las 5 cámaras
+    public Transform camaraPadre;              // tu empty con 5 cámaras
     public List<EventoVisual> eventos = new();
 
-    private int eventoActual = 0;
+    private int indiceEvento = 0;
 
-    void Start()
-    {
-        audioNarracion.Play();
-    }
+    void Start() => audioNarracion.Play();
 
     void Update()
     {
-        if (eventoActual >= eventos.Count) return;
+        if (indiceEvento >= eventos.Count) return;
 
-        float tiempoActual = audioNarracion.time;
-        EventoVisual ev = eventos[eventoActual];
-
-        if (tiempoActual >= ev.tiempoEvento)
+        var ev = eventos[indiceEvento];
+        if (audioNarracion.time >= ev.tiempoEvento)
         {
-            EjecutarEvento(ev);
-            eventoActual++;
+            StartCoroutine(EjecutarEvento(ev));
+            indiceEvento++;
         }
     }
 
-    void EjecutarEvento(EventoVisual ev)
+    /* ────────── EVENTO ────────── */
+    IEnumerator EjecutarEvento(EventoVisual ev)
     {
-        // Movimiento cámara
-        if (ev.moverCamara)
-            camaraPadre.transform.position = ev.nuevaPosicionCamara;
-
-        if (ev.rotarCamara)
-            camaraPadre.transform.Rotate(ev.rotacionAdicionalCamara);
-
-        // Fog
+        /* Fog */
         if (ev.cambiarFog)
-            RenderSettings.fogDensity = ev.nuevaDensidadFog;
+            StartCoroutine(LerpFog(RenderSettings.fogDensity, ev.densidadFogObjetivo, ev.duracionFog));
 
-        // Activación y desactivación
-        foreach (GameObject obj in ev.objetosActivar)
-            if (obj != null) obj.SetActive(true);
+        /* Movimiento */
+        if (ev.moverCamara)
+            StartCoroutine(LerpPosition(camaraPadre, camaraPadre.position, ev.nuevaPosicionCamara, ev.duracionMovimientoCamara));
 
-        foreach (GameObject obj in ev.objetosDesactivar)
-            if (obj != null) obj.SetActive(false);
+        /* Rotación */
+        if (ev.rotarCamara)
+        {
+            Quaternion rotInicial = camaraPadre.rotation;
+            Quaternion rotFinal = Quaternion.Euler(ev.rotacionObjetivoEuler);
+            StartCoroutine(LerpRotation(camaraPadre, rotInicial, rotFinal, ev.duracionRotacionCamara));
+        }
 
-        // Escala IN
-        foreach (GameObject obj in ev.objetosEscalaIn)
-            if (obj != null) StartCoroutine(AnimarEscala(obj, Vector3.zero, Vector3.one, 1f));
+        /* Activar / Desactivar */
+        ev.objetosActivar.ForEach(o => { if (o) o.SetActive(true); });
+        ev.objetosDesactivar.ForEach(o => { if (o) o.SetActive(false); });
 
-        // Escala OUT
-        foreach (GameObject obj in ev.objetosEscalaOut)
-            if (obj != null) StartCoroutine(AnimarEscala(obj, obj.transform.localScale, Vector3.zero, 1f));
+        /* Escalas */
+        ev.objetosEscalaIn.ForEach(o => { if (o) StartCoroutine(AnimarEscala(o, Vector3.zero, Vector3.one, 1f)); });
+        ev.objetosEscalaOut.ForEach(o => { if (o) StartCoroutine(AnimarEscala(o, o.transform.localScale, Vector3.zero, 1f)); });
+
+        yield break;
     }
 
-    IEnumerator AnimarEscala(GameObject obj, Vector3 inicio, Vector3 fin, float duracion)
+    /* ────────── CORUTINAS DE INTERPOLACIÓN ────────── */
+
+    IEnumerator LerpFog(float inicio, float fin, float dur)
     {
         float t = 0f;
-        obj.transform.localScale = inicio;
-
-        while (t < duracion)
+        while (t < dur)
         {
             t += Time.deltaTime;
-            obj.transform.localScale = Vector3.Lerp(inicio, fin, t / duracion);
+            RenderSettings.fogDensity = Mathf.Lerp(inicio, fin, t / dur);
             yield return null;
         }
+        RenderSettings.fogDensity = fin;
+    }
 
+    IEnumerator LerpPosition(Transform tr, Vector3 ini, Vector3 fin, float dur)
+    {
+        float t = 0f;
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            tr.position = Vector3.Lerp(ini, fin, t / dur);
+            yield return null;
+        }
+        tr.position = fin;
+    }
+
+    IEnumerator LerpRotation(Transform tr, Quaternion ini, Quaternion fin, float dur)
+    {
+        float t = 0f;
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            tr.rotation = Quaternion.Slerp(ini, fin, t / dur);
+            yield return null;
+        }
+        tr.rotation = fin;
+    }
+
+    IEnumerator AnimarEscala(GameObject obj, Vector3 ini, Vector3 fin, float dur)
+    {
+        float t = 0f;
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            obj.transform.localScale = Vector3.Lerp(ini, fin, t / dur);
+            yield return null;
+        }
         obj.transform.localScale = fin;
-        if (fin == Vector3.zero) obj.SetActive(false); // ocultar si desaparece
+        if (fin == Vector3.zero) obj.SetActive(false);
     }
 }

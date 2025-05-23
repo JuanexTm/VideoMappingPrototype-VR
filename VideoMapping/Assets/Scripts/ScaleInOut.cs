@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ScaleInOut : MonoBehaviour
 {
-    public float scaleDuration = 1f;
-    public float visibleDuration = 3f;
+    public float scaleDuration = 3f;
+    public float visibleDuration = 40f;
 
     private Vector3 originalScale;
 

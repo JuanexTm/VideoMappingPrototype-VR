@@ -3,8 +3,8 @@ using System.Collections;
 
 public class FadeInOut : MonoBehaviour
 {
-    public float fadeDuration = 2f;
-    public float visibleDuration = 3f;
+    public float fadeDuration = 4f;
+    public float visibleDuration = 40f;
 
     private Material material;
     private Color baseColor;
